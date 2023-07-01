@@ -105,6 +105,7 @@ button.home{
     display: none;
 }
 button.home img{
+    border-radius: 50%;
     width: 40px;
 }
 @media screen and (max-width: 400px) {
