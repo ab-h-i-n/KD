@@ -7,7 +7,7 @@ console.log(movieList().length)
 
 const movieSections = movieList().map((movie, index) => {
     const n = index + 1;
-    const movid = "movie " + n;
+    const movid = "movie"+n;
 
     const section = document.createElement("section");
     section.id = movid;
@@ -30,8 +30,8 @@ const movieSections = movieList().map((movie, index) => {
         button.classList.add('next');
         button.innerText = "NEXT";
     }else{
-        button.classList.add('home');
-        button.innerText = "Home"
+        button.classList.add('about');
+        button.innerText = "About"
     }
 
     section.append(img, header, p ,button);
@@ -43,20 +43,45 @@ moviescont.append(...movieSections);
 const scrollbtn = document.querySelector('.scrolldwn');
 
 scrollbtn.addEventListener("click", () => {
-    window.scrollBy(0, window.innerHeight);
+    const firstmov = document.querySelector('#movie1');
+    firstmov.scrollIntoView({behavior : "smooth"});
 });
 
 const nextbtns = document.querySelectorAll('.next');
 
-nextbtns.forEach(nextbtn =>{
-    nextbtn.addEventListener("click",()=>{
-        window.scrollBy(0,window.innerHeight);
-    })
-})
+nextbtns.forEach((nextbtn, index) => {
+    nextbtn.addEventListener("click", () => {
+        const nextmovie = document.querySelector(`#movie${index + 2}`);
+        nextmovie.scrollIntoView({ behavior: "smooth" });
+    });
+});
+
+const aboutbtn = document.querySelector('.about');
+
+aboutbtn.addEventListener("click", () => {
+    const aboutSection = document.querySelector('#about');
+    aboutSection.scrollIntoView({ behavior: 'smooth' });
+});
 
 const homebtn = document.querySelector('.home');
 
-homebtn.addEventListener("click", () => {
-    const homeSection = document.querySelector('#home');
-    homeSection.scrollIntoView({ behavior: 'smooth' });
-});
+homebtn.addEventListener("click",()=>{
+    const home = document.querySelector('#home');
+    home.scrollIntoView({behavior : 'smooth'});
+})
+
+
+function isHomePageVisible() {
+    const movie1 = document.querySelector('#movie1');
+    const rect = movie1.getBoundingClientRect();
+    return rect.top;
+  }
+
+window.addEventListener("scroll" ,()=>{
+
+    if(isHomePageVisible() > 0 ){
+        homebtn.style.display = "none";
+    }else{
+        homebtn.style.display = "block";
+    }
+})
