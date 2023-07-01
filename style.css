@@ -23,7 +23,7 @@ body{
 }
 #home .scrolldwn{
     position: absolute;
-    bottom: 5%;
+    bottom: 150px;
     width: 100%;
     font-size: 1rem;
     font-weight: 300;
